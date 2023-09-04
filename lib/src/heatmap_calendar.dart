@@ -86,7 +86,7 @@ class HeatMapCalendar extends StatefulWidget {
   ///
   /// First value is the left side widget and second value is the right side widget.
   /// Be aware that [colorTipHelper.length] have to greater or equal to 2.
-  /// Give null value makes default 'less' and 'more' [Text].
+  /// Give null value makes default 'Less' and 'More' [Text].
   final List<Widget?>? colorTipHelper;
 
   /// The integer value which represents the number of [HeatMapColorTip]'s tip container.

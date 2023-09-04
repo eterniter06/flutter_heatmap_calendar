@@ -82,12 +82,15 @@ class HeatMapColorTip extends StatelessWidget {
 
   /// Container which is colored by [color].
   Widget _tipContainer(Color color) {
-    return Container(
-      color: HeatMapColor.defaultColor,
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
       child: Container(
-        width: size ?? 10,
-        height: size ?? 10,
-        color: color,
+        color: HeatMapColor.defaultColor,
+        child: Container(
+          width: size ?? 10,
+          height: size ?? 10,
+          color: color,
+        ),
       ),
     );
   }
@@ -107,9 +110,9 @@ class HeatMapColorTip extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          leftWidget ?? _defaultText('less'),
+          leftWidget ?? _defaultText('Less'),
           ..._heatmapList(),
-          rightWidget ?? _defaultText('more'),
+          rightWidget ?? _defaultText('More'),
         ],
       ),
     );
