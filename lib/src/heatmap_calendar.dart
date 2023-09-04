@@ -24,6 +24,14 @@ class HeatMapCalendar extends StatefulWidget {
   /// The date values of initial year and month.
   final DateTime? initDate;
 
+  /// Limit how far behind the calendar can be viewed
+  /// Set to null by default which does not set any bound
+  final DateTime? calendarBeginDate;
+
+  /// Limit how far ahead the calendar can be viewed
+  /// Set to null by default which does tno set any bound
+  final DateTime? calendarEndDate;
+
   /// The double value of every block's size.
   final double? size;
 
@@ -109,6 +117,8 @@ class HeatMapCalendar extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
+    this.calendarBeginDate,
+    this.calendarEndDate,
   }) : super(key: key);
 
   @override
@@ -117,7 +127,7 @@ class HeatMapCalendar extends StatefulWidget {
 
 class _HeatMapCalendar extends State<HeatMapCalendar> {
   // The DateTime value of first day of the current month.
-  DateTime? _currentDate;
+  late DateTime _currentDate;
 
   @override
   void initState() {
@@ -132,10 +142,9 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
 
   void changeMonth(int direction) {
     setState(() {
-      _currentDate =
-          DateUtil.changeMonth(_currentDate ?? DateTime.now(), direction);
+      _currentDate = DateUtil.changeMonth(_currentDate, direction);
     });
-    if (widget.onMonthChange != null) widget.onMonthChange!(_currentDate!);
+    if (widget.onMonthChange != null) widget.onMonthChange!(_currentDate);
   }
 
   /// Header widget which shows left, right buttons and year/month text.
@@ -149,26 +158,35 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             Icons.arrow_back_ios,
             size: 14,
           ),
-          onPressed: () => changeMonth(-1),
+          onPressed: widget.calendarBeginDate == null ||
+                  _currentDate.year > widget.calendarBeginDate!.year ||
+                  (_currentDate.year == widget.calendarBeginDate!.year &&
+                      _currentDate.month > widget.calendarBeginDate!.month)
+              ? () => changeMonth(-1)
+              : null,
         ),
 
         // Text which shows the current year and month
         Text(
-          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
+          DateUtil.MONTH_LABEL[_currentDate.month] +
               ' ' +
-              (_currentDate?.year).toString(),
+              (_currentDate.year).toString(),
           style: TextStyle(
             fontSize: widget.monthFontSize ?? 12,
           ),
         ),
-
         // Next month button.
         IconButton(
           icon: const Icon(
             Icons.arrow_forward_ios,
             size: 14,
           ),
-          onPressed: () => changeMonth(1),
+          onPressed: widget.calendarEndDate == null ||
+                  _currentDate.year < widget.calendarEndDate!.year ||
+                  (_currentDate.year == widget.calendarEndDate!.year &&
+                      _currentDate.month < widget.calendarEndDate!.month)
+              ? () => changeMonth(1)
+              : null,
         ),
       ],
     );
@@ -216,7 +234,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
           _header(),
           _weekLabel(),
           HeatMapCalendarPage(
-            baseDate: _currentDate ?? DateTime.now(),
+            baseDate: _currentDate,
             colorMode: widget.colorMode,
             flexible: widget.flexible,
             size: widget.size,
