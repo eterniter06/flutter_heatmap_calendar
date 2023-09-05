@@ -8,6 +8,20 @@ class HeatMapCalendarPage extends StatelessWidget {
   /// The DateTime value which contains the current calendar's date value.
   final DateTime baseDate;
 
+  /// Date beyond which entries will be rendered as unavilable.
+  /// Dates beyond this date will not have their date displayed in the container.
+  /// Set to null by default on which all entries are shown the same way.
+  ///
+  /// This date is inclusive.
+  final DateTime? calendarEndDate;
+
+  /// Date before which entries will be rendered as unavilable.
+  /// Dates before this date will not have their date displayed in the container.
+  /// Set to null by default on which all entries are shown the same way.
+  ///
+  /// This date is inclusive.
+  final DateTime? calendarBeginDate;
+
   /// The list value of the map value that contains
   /// separated start and end of every weeks on month.
   ///
@@ -75,6 +89,8 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.colorsets,
     this.borderRadius,
     this.onClick,
+    this.calendarEndDate,
+    this.calendarBeginDate,
   })  : separatedDate = DateUtil.separatedMonth(baseDate),
         maxValue = DatasetsUtil.getMaxValue(
             DatasetsUtil.filterMonth(datasets, baseDate)),
@@ -87,6 +103,8 @@ class HeatMapCalendarPage extends StatelessWidget {
       children: <Widget>[
         for (var date in separatedDate)
           HeatMapCalendarRow(
+            calendarEndDate: calendarEndDate,
+            calendarBeginDate: calendarBeginDate,
             startDate: date.keys.first,
             endDate: date.values.first,
             colorMode: colorMode,

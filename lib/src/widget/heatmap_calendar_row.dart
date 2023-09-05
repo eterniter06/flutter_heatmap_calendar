@@ -12,6 +12,20 @@ class HeatMapCalendarRow extends StatelessWidget {
   /// The integer value of end date of the week
   final DateTime endDate;
 
+  /// Date beyond which entries will be rendered as unavilable
+  /// Dates beyond this date will not have their date displayed in the container
+  /// Set to null by default on which all entries are shown the same way
+  ///
+  /// This date is inclusive.
+  final DateTime? calendarEndDate;
+
+  /// Date before which entries will be rendered as unavilable.
+  /// Dates before this date will not have their date displayed in the container.
+  /// Set to null by default on which all entries are shown the same way.
+  ///
+  /// This date is inclusive.
+  final DateTime? calendarBeginDate;
+
   /// The double value of every [HeatMapContainer]'s width and height.
   final double? size;
 
@@ -81,6 +95,8 @@ class HeatMapCalendarRow extends StatelessWidget {
     this.datasets,
     this.maxValue,
     this.onClick,
+    this.calendarEndDate,
+    this.calendarBeginDate,
   })  : dayContainers = List<Widget>.generate(
           7,
           // If current week has first day of the month and
@@ -106,6 +122,13 @@ class HeatMapCalendarRow extends StatelessWidget {
                   // start day of week value and end day of week.
                   //
                   // So we have to give every day information to each HeatMapContainer.
+                  showText: displayCalendarDate(
+                    currentDate: DateTime(startDate.year, startDate.month,
+                        startDate.day - startDate.weekday % 7 + i),
+                    calendarBeginDate: calendarBeginDate,
+                    calendarEndDate: calendarEndDate,
+                  ),
+
                   date: DateTime(startDate.year, startDate.month,
                       startDate.day - startDate.weekday % 7 + i),
                   backgroundColor: defaultColor,
@@ -163,5 +186,27 @@ class HeatMapCalendarRow extends StatelessWidget {
           WidgetUtil.flexibleContainer(flexible ?? false, true, container),
       ],
     );
+  }
+
+  static bool displayCalendarDate(
+      {required DateTime currentDate,
+      DateTime? calendarEndDate,
+      DateTime? calendarBeginDate}) {
+    if (calendarBeginDate == null && calendarEndDate == null) {
+      return true;
+    }
+
+    DateTime? upper =
+        calendarEndDate?.copyWith(hour: 23, minute: 59, second: 59);
+
+    DateTime? lower = calendarBeginDate?.add(const Duration(seconds: -1));
+
+    if (lower != null && upper != null) {
+      return currentDate.isBefore(upper) && currentDate.isAfter(lower);
+    }
+
+    return lower == null
+        ? currentDate.isBefore(upper!)
+        : currentDate.isAfter(lower.add(const Duration(seconds: -1)));
   }
 }
