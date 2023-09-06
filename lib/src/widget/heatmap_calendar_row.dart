@@ -122,7 +122,7 @@ class HeatMapCalendarRow extends StatelessWidget {
                   // start day of week value and end day of week.
                   //
                   // So we have to give every day information to each HeatMapContainer.
-                  showText: displayCalendarDate(
+                  showText: withinBounds(
                     currentDate: DateTime(startDate.year, startDate.month,
                         startDate.day - startDate.weekday % 7 + i),
                     calendarBeginDate: calendarBeginDate,
@@ -142,11 +142,19 @@ class HeatMapCalendarRow extends StatelessWidget {
                   // we have to color the matched HeatMapContainer.
                   //
                   // If datasets is null or doesn't contains the equal DateTime value, send null.
-                  selectedColor: datasets?.keys.contains(DateTime(
-                              startDate.year,
-                              startDate.month,
-                              startDate.day - startDate.weekday % 7 + i)) ??
-                          false
+                  selectedColor: (datasets?.keys.contains(DateTime(
+                                  startDate.year,
+                                  startDate.month,
+                                  startDate.day - startDate.weekday % 7 + i)) ??
+                              false) &&
+                          withinBounds(
+                            currentDate: DateTime(
+                                startDate.year,
+                                startDate.month,
+                                startDate.day - startDate.weekday % 7 + i),
+                            calendarBeginDate: calendarBeginDate,
+                            calendarEndDate: calendarEndDate,
+                          )
                       // If colorMode is ColorMode.opacity,
                       ? colorMode == ColorMode.opacity
                           // Color the container with first value of colorsets
@@ -188,7 +196,7 @@ class HeatMapCalendarRow extends StatelessWidget {
     );
   }
 
-  static bool displayCalendarDate(
+  static bool withinBounds(
       {required DateTime currentDate,
       DateTime? calendarEndDate,
       DateTime? calendarBeginDate}) {
