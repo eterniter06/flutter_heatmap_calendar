@@ -21,7 +21,7 @@ Add below line to your personal package's `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  flutter_heatmap_calendar: ^1.0.5
+    flutter_heatmap_calendar: ^1.0.5
 ```
 
 And run `flutter pub get` to install.
@@ -63,6 +63,8 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 <!-- prettier-ignore -->
 |Props|Types|Default|Description|
 |-|-|---|-|
+|calendarBeginDate|`DateTime?`|`null`|Limit how far back the calendar can be viewed, start date of HeatMapCalendar. `null` implies no limit|
+|calendarEndDate|`DateTime?`|`null`|Limit how far ahead the calendar can be viewed, end date of HeatMapCalendar. `null` implies no limit|
 |initDate|`DateTime?`|Today<br>( `DateTime.now()` )|Initialized Year/Month value of `HeatMapCalendar`.|
 |datasets|`Map<DateTime, int>?`|`null`|Sets of data which to be displayed.|
 |colorsets|`Map<int, Color>`|required|Sets of color values for its thresholds key value.<br>At least one Color is required.<br>Be aware that only first color will be used if `ColorMode` is `ColorMode.opacity`.|
