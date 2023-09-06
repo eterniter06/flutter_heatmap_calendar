@@ -31,7 +31,7 @@ class HeatMapPage extends StatelessWidget {
   final DateTime endDate;
 
   /// The double value of every block's width and height.
-  final double? size;
+  final double size;
 
   /// The double value of every block's fontSize.
   final double? fontSize;
@@ -80,7 +80,7 @@ class HeatMapPage extends StatelessWidget {
     required this.colorMode,
     required this.startDate,
     required this.endDate,
-    this.size,
+    required this.size,
     this.fontSize,
     this.datasets,
     this.defaultColor,

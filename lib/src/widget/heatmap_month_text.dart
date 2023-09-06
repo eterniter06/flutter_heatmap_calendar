@@ -8,7 +8,7 @@ class HeatMapMonthText extends StatelessWidget {
   final List<int>? firstDayInfos;
 
   /// The double value for space between labels.
-  final double? size;
+  final double size;
 
   /// The double value of font size.
   final double? fontSize;
@@ -24,7 +24,7 @@ class HeatMapMonthText extends StatelessWidget {
     this.firstDayInfos,
     this.fontSize,
     this.fontColor,
-    this.size,
+    this.size = 20,
     this.margin,
   }) : super(key: key);
 
@@ -46,10 +46,12 @@ class HeatMapMonthText extends StatelessWidget {
         // Add Text without width margin if first week is end of the month.
         // Otherwise, add Text with width margin.
         items.add(
-          firstDayInfos!.length == 1 || (label == 0 && firstDayInfos![label] != firstDayInfos![label + 1])
+          firstDayInfos!.length == 1 ||
+                  (label == 0 &&
+                      firstDayInfos![label] != firstDayInfos![label + 1])
               ? _renderText(DateUtil.SHORT_MONTH_LABEL[firstDayInfos![label]])
               : Container(
-                  width: (((size ?? 20) + (margin?.right ?? 2)) * 2),
+                  width: ((size + (margin?.right ?? 2)) * 2),
                   margin: EdgeInsets.only(
                       left: margin?.left ?? 2, right: margin?.right ?? 2),
                   child: _renderText(
@@ -65,7 +67,7 @@ class HeatMapMonthText extends StatelessWidget {
         items.add(Container(
           margin: EdgeInsets.only(
               left: margin?.left ?? 2, right: margin?.right ?? 2),
-          width: size ?? 20,
+          width: size,
         ));
       }
     }

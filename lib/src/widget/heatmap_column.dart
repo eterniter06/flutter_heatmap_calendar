@@ -23,7 +23,7 @@ class HeatMapColumn extends StatelessWidget {
   final DateTime endDate;
 
   /// The double value of every [HeatMapContainer]'s width and height.
-  final double? size;
+  final double size;
 
   /// The double value of every [HeatMapContainer]'s fontSize.
   final double? fontSize;
@@ -79,7 +79,7 @@ class HeatMapColumn extends StatelessWidget {
     required this.endDate,
     required this.colorMode,
     required this.numDays,
-    this.size,
+    this.size = 42,
     this.fontSize,
     this.defaultColor,
     this.datasets,
@@ -141,8 +141,8 @@ class HeatMapColumn extends StatelessWidget {
                 7 - numDays,
                 (i) => Container(
                     margin: margin ?? const EdgeInsets.all(2),
-                    width: size ?? 42,
-                    height: size ?? 42),
+                    width: size,
+                    height: size),
               )
             : [],
         super(key: key);

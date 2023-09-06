@@ -37,7 +37,7 @@ class HeatMapCalendar extends StatefulWidget {
   final DateTime? calendarEndDate;
 
   /// The double value of every block's size.
-  final double? size;
+  final double size;
 
   /// The text color value of every blocks.
   final Color? textColor;
@@ -160,6 +160,8 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
           DateUtil.startDayOfMonth(widget.initDate ?? DateTime.now());
     });
 
+    // Hour, minutes and other low level details do not make any sense
+    // as the smallest unit is a day
     calendarEndDate = stripHourLevelAndBelowDetails(widget.calendarEndDate);
     calendarBeginDate = stripHourLevelAndBelowDetails(widget.calendarBeginDate);
   }
@@ -228,7 +230,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
               margin: EdgeInsets.only(
                   left: widget.margin?.left ?? 2,
                   right: widget.margin?.right ?? 2),
-              width: widget.size ?? 42,
+              width: widget.size,
               alignment: Alignment.center,
               child: Text(
                 label,

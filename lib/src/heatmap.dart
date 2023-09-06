@@ -28,7 +28,7 @@ class HeatMap extends StatefulWidget {
   final Color? textColor;
 
   /// The double value of every block's size.
-  final double? size;
+  final double size;
 
   /// The double value of every block's fontSize.
   final double? fontSize;
