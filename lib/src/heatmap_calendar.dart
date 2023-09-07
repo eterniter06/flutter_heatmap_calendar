@@ -103,21 +103,21 @@ class HeatMapCalendar extends StatefulWidget {
     Key? key,
     required this.colorsets,
     this.colorMode = ColorMode.opacity,
+    this.showColorTip = true,
+    this.flexible = false,
+    this.size = 42,
     this.defaultColor,
     this.datasets,
     this.initDate,
-    this.size = 42,
     this.fontSize,
     this.monthFontSize,
     this.textColor,
     this.weekFontSize,
     this.weekTextColor,
     this.borderRadius,
-    this.flexible = false,
     this.margin,
     this.onClick,
     this.onMonthChange,
-    this.showColorTip = true,
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
@@ -184,12 +184,8 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             Icons.arrow_back_ios,
             size: 14,
           ),
-          onPressed: calendarBeginDate == null ||
-                  _currentDate.year > calendarBeginDate!.year ||
-                  (_currentDate.year == calendarBeginDate!.year &&
-                      _currentDate.month > calendarBeginDate!.month)
-              ? () => changeMonth(-1)
-              : null,
+          onPressed:
+              isMonthAfterCalendarBeginDate() ? () => changeMonth(-1) : null,
         ),
 
         // Text which shows the current year and month
@@ -207,15 +203,25 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             Icons.arrow_forward_ios,
             size: 14,
           ),
-          onPressed: calendarEndDate == null ||
-                  _currentDate.year < calendarEndDate!.year ||
-                  (_currentDate.year == calendarEndDate!.year &&
-                      _currentDate.month < calendarEndDate!.month)
-              ? () => changeMonth(1)
-              : null,
+          onPressed:
+              isMonthBeforeCalendarEndDate() ? () => changeMonth(1) : null,
         ),
       ],
     );
+  }
+
+  bool isMonthBeforeCalendarEndDate() {
+    return calendarEndDate == null ||
+        _currentDate.year < calendarEndDate!.year ||
+        (_currentDate.year == calendarEndDate!.year &&
+            _currentDate.month < calendarEndDate!.month);
+  }
+
+  bool isMonthAfterCalendarBeginDate() {
+    return calendarBeginDate == null ||
+        _currentDate.year > calendarBeginDate!.year ||
+        (_currentDate.year == calendarBeginDate!.year &&
+            _currentDate.month > calendarBeginDate!.month);
   }
 
   Widget _weekLabel() {
