@@ -1,7 +1,7 @@
 class DateUtil {
-  static const int DAYS_IN_WEEK = 7;
+  static const int daysInWeek = 7;
 
-  static const List<String> MONTH_LABEL = [
+  static const List<String> monthLabel = [
     '',
     'January',
     'February',
@@ -17,7 +17,7 @@ class DateUtil {
     'December',
   ];
 
-  static const List<String> SHORT_MONTH_LABEL = [
+  static const List<String> shortMonthLabel = [
     '',
     'Jan',
     'Feb',
@@ -33,7 +33,7 @@ class DateUtil {
     'Dec',
   ];
 
-  static const List<String> WEEK_LABEL = [
+  static const List<String> weekLabel = [
     '',
     'Sun',
     'Mon',
@@ -61,7 +61,7 @@ class DateUtil {
       final DateTime referenceDate) {
     DateTime _startDate = startDayOfMonth(referenceDate);
     DateTime _endDate = DateTime(_startDate.year, _startDate.month,
-        _startDate.day + DAYS_IN_WEEK - _startDate.weekday % DAYS_IN_WEEK - 1);
+        _startDate.day + daysInWeek - _startDate.weekday % daysInWeek - 1);
     DateTime _finalDate = endDayOfMonth(referenceDate);
     List<Map<DateTime, DateTime>> _savedMonth = [];
 
@@ -70,8 +70,8 @@ class DateUtil {
       _startDate = changeDay(_endDate, 1);
       _endDate = changeDay(
           _endDate,
-          endDayOfMonth(_endDate).day - _startDate.day >= DAYS_IN_WEEK
-              ? DAYS_IN_WEEK
+          endDayOfMonth(_endDate).day - _startDate.day >= daysInWeek
+              ? daysInWeek
               : endDayOfMonth(_endDate).day - _startDate.day + 1);
     }
     return _savedMonth;
@@ -90,33 +90,33 @@ class DateUtil {
   //#region unused methods.
 
   // static int weekCount(final DateTime referenceDate) {
-  //   return ((startDayOfMonth(referenceDate).weekday % DAYS_IN_WEEK +
+  //   return ((startDayOfMonth(referenceDate).weekday % daysInWeek +
   //               endDayOfMonth(referenceDate).day) /
-  //           DAYS_IN_WEEK)
+  //           daysInWeek)
   //       .ceil();
   // }
 
   // static int weekPos(final DateTime referenceDate) =>
   //     (referenceDate.day +
-  //         startDayOfMonth(referenceDate).weekday % DAYS_IN_WEEK) ~/
-  //     DAYS_IN_WEEK;
+  //         startDayOfMonth(referenceDate).weekday % daysInWeek) ~/
+  //     daysInWeek;
 
   // static DateTime startDayOfWeek(final DateTime referenceDate) =>
   //     weekPos(referenceDate) == 0
   //         ? startDayOfMonth(referenceDate)
   //         : DateTime(referenceDate.year, referenceDate.month,
-  //             referenceDate.day - referenceDate.weekday % DAYS_IN_WEEK);
+  //             referenceDate.day - referenceDate.weekday % daysInWeek);
 
   // static DateTime endDayOfWeek(final DateTime referenceDate) {
   //   return weekPos(referenceDate) != (weekCount(referenceDate) - 1)
   //       ? DateTime(referenceDate.year, referenceDate.month,
-  //           referenceDate.day - referenceDate.weekday % DAYS_IN_WEEK + 6)
+  //           referenceDate.day - referenceDate.weekday % daysInWeek + 6)
   //       : endDayOfMonth(referenceDate);
   // }
 
   // static DateTime changeWeek(final DateTime referenceDate, int weekCount) =>
   //     DateTime(referenceDate.year, referenceDate.month,
-  //         1 + DAYS_IN_WEEK * weekCount);
+  //         1 + daysInWeek * weekCount);
 
   // static bool compareDate(final DateTime first, final DateTime second) =>
   //     first.year == second.year &&
