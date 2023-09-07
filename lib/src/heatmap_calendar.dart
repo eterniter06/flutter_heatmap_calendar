@@ -135,7 +135,11 @@ class HeatMapCalendar extends StatefulWidget {
     @Deprecated(
         'Please use leadingColorTipHelper and trailingColorTipHelper instead.')
     this.colorTipHelper,
-  }) : super(key: key);
+  })  : assert(
+            (trailingColorTipHelper == null && leadingColorTipHelper == null) ||
+                colorTipHelper == null,
+            'colorTipHelper is deprecated. Please use the trailing and leading counterparts.\ncolorTipHelper cannot be used in conjunction with trailingColorTipHelper or leadingColorTipHelpers'),
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() => _HeatMapCalendar();
@@ -297,8 +301,10 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             HeatMapColorTip(
               colorMode: widget.colorMode,
               colorsets: widget.colorsets,
-              leftWidget: widget.leadingColorTipHelper,
-              rightWidget: widget.trailingColorTipHelper,
+              leftWidget:
+                  widget.leadingColorTipHelper ?? widget.colorTipHelper?[0],
+              rightWidget:
+                  widget.trailingColorTipHelper ?? widget.colorTipHelper?[1],
               containerCount: widget.colorTipCount,
               size: widget.colorTipSize,
             ),
