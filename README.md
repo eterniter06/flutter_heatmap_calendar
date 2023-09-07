@@ -71,7 +71,7 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 |defaultColor|`Color?`|![#F8F9FA](https://via.placeholder.com/15/F8F9FA/000000?text=+) `Color(0xFFF8F9FA)`|Default color of every block.|
 |textColor|`Color?`|![#8A8A8A](https://via.placeholder.com/15/8A8A8A/000000?text=+) `Color(0xFF8A8A8A)`|Color value of every text.|
 |colorMode|`ColorMode`|`ColorMode.opacity`|`ColorMode.opacity` requires just one colorsets value and changes color dynamically based on hightest value of `datasets`.<br>`ColorMode.color` changes colors based on `colorsets` thresholds key value.|
-|size|`double?`|`42`|The size of every block.|
+|size|`double`|`42`|The size of every block.|
 |fontSize|`double?`|`null`|The size of every text.|
 |monthFontSize|`double?`|`12`|The size of month label.|
 |weekFontSize|`double?`|`12`|The size of week label.|
@@ -81,9 +81,11 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 |borderRadius|`double?`|`5`|Border radius value of block.|
 |flexible|`bool?`|`false`|Makes `HeatMapCalendar`'s size dynamically fit on screen.<br>If `flexible` is `true` then, `size` props will be ignored.|
 |showColorTip|`bool?`|`true`|Show color tip if `showColorTip` is `true`.|
-|colorTipHelper|`List<Widget?>?`|`null`|Widgets which are shown at left and right side of `colorTip`.<br>First value is the left side widget and second value is the right side widget.<br>Give null value makes default 'less' and 'more' text.|
+|leadingColorTipHelper|`Widget?`|`null`|Widget shown to the left of `colorTip`. A `null` value defaults to `Text('Less')` with style bold.|
+|trailingColorTipHelper|`Widget?`|`null`|Widget shown to the right of `colorTip`. A `null` value defaults to `Text('More')` with style bold.|
+|(Deprecated)<br>colorTipHelper|`List<Widget?>?`|`null`|Widgets which are shown at left and right side of `colorTip`.<br>First value is the left side widget and second value is the right side widget.<br>Give null value makes default 'less' and 'more' text.|
 |colorTipCount|`int?`|`7`|Length of `colorTip` block.|
-|colorTipSize|`double?`|`10`|The size of `colorTip`.|
+|colorTipSize|`double`|`10`|The size of `colorTip`.|
 
 ## Example
 
