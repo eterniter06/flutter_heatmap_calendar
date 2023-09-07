@@ -33,16 +33,16 @@ class HeatMapColorTip extends StatelessWidget {
   final int? containerCount;
 
   /// The double value of tip container's size.
-  final double? size;
+  final double size;
 
   const HeatMapColorTip({
     Key? key,
     required this.colorMode,
+    required this.size,
     this.colorsets,
     this.leftWidget,
     this.rightWidget,
     this.containerCount,
-    this.size,
   }) : super(key: key);
 
   /// It returns the List of tip container.
@@ -87,8 +87,8 @@ class HeatMapColorTip extends StatelessWidget {
       child: Container(
         color: HeatMapColor.defaultColor,
         child: Container(
-          width: size ?? 10,
-          height: size ?? 10,
+          width: size,
+          height: size,
           color: color,
         ),
       ),
@@ -99,7 +99,7 @@ class HeatMapColorTip extends StatelessWidget {
   Widget _defaultText(String text) {
     return Text(
       text,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: size ?? 10),
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: size),
     );
   }
 

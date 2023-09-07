@@ -85,7 +85,7 @@ class HeatMap extends StatefulWidget {
   final int? colorTipCount;
 
   /// The double value of [HeatMapColorTip]'s tip container's size.
-  final double? colorTipSize;
+  final double colorTipSize;
 
   const HeatMap({
     Key? key,
@@ -106,7 +106,7 @@ class HeatMap extends StatefulWidget {
     this.scrollable = false,
     this.colorTipHelper,
     this.colorTipCount,
-    this.colorTipSize,
+    this.colorTipSize = 10,
   }) : super(key: key);
 
   @override

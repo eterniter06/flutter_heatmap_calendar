@@ -93,11 +93,19 @@ class HeatMapCalendar extends StatefulWidget {
   /// Give null value makes default 'Less' and 'More' [Text].
   final List<Widget?>? colorTipHelper;
 
+  /// Widget that appears to the left of the colorTipWidget
+  /// Setting this to null builds a [Text] widget "Less" with [TextStyle.bold] and fontSize as colorTipSize
+  final Widget? leadingColorTipHelper;
+
+  /// Widget that appears on the right of colorTipWidget
+  /// Setting this to null builds a [Text] widget "More" with [TextStyle.bold] and fontSize as colorTipSize
+  final Widget? trailingColorTipHelper;
+
   /// The integer value which represents the number of [HeatMapColorTip]'s tip container.
   final int? colorTipCount;
 
   /// The double value of [HeatMapColorTip]'s tip container's size.
-  final double? colorTipSize;
+  final double colorTipSize;
 
   const HeatMapCalendar({
     Key? key,
@@ -106,6 +114,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.showColorTip = true,
     this.flexible = false,
     this.size = 42,
+    this.colorTipSize = 10,
     this.defaultColor,
     this.datasets,
     this.initDate,
@@ -118,11 +127,14 @@ class HeatMapCalendar extends StatefulWidget {
     this.margin,
     this.onClick,
     this.onMonthChange,
-    this.colorTipHelper,
     this.colorTipCount,
-    this.colorTipSize,
     this.calendarBeginDate,
     this.calendarEndDate,
+    this.leadingColorTipHelper,
+    this.trailingColorTipHelper,
+    @Deprecated(
+        'Please use leadingColorTipHelper and trailingColorTipHelper instead.')
+    this.colorTipHelper,
   }) : super(key: key);
 
   @override
@@ -285,8 +297,8 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             HeatMapColorTip(
               colorMode: widget.colorMode,
               colorsets: widget.colorsets,
-              leftWidget: widget.colorTipHelper?[0],
-              rightWidget: widget.colorTipHelper?[1],
+              leftWidget: widget.leadingColorTipHelper,
+              rightWidget: widget.trailingColorTipHelper,
               containerCount: widget.colorTipCount,
               size: widget.colorTipSize,
             ),
