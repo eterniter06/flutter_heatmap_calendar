@@ -61,7 +61,12 @@ class HeatMapColumn extends StatelessWidget {
   /// Function that will be called when a block is clicked.
   ///
   /// Paratmeter gives clicked [DateTime] value.
-  final Function(DateTime)? onClick;
+  final Function(DateTime, TapDownDetails details)? onTapDown;
+
+  /// Function called when tap is released
+  ///
+  /// Gives [DateTime] value
+  final Function(DateTime, TapUpDetails details)? onTapUp;
 
   /// The integer value of the maximum value for the highest value of the month.
   final int? maxValue;
@@ -87,7 +92,8 @@ class HeatMapColumn extends StatelessWidget {
     this.borderRadius,
     this.margin,
     this.colorsets,
-    this.onClick,
+    this.onTapDown,
+    this.onTapUp,
     this.maxValue,
     this.showText,
   })  :
@@ -102,7 +108,8 @@ class HeatMapColumn extends StatelessWidget {
             textColor: textColor,
             borderRadius: borderRadius,
             margin: margin,
-            onClick: onClick,
+            onTapDown: onTapDown,
+            onTapUp: onTapUp,
             showText: showText,
             // If datasets has DateTime key which is equal to this HeatMapContainer's date,
             // we have to color the matched HeatMapContainer.

@@ -51,7 +51,7 @@ class HeatMap extends StatefulWidget {
   /// Function that will be called when a block is clicked.
   ///
   /// Parameter gives clicked [DateTime] value.
-  final Function(DateTime)? onClick;
+  final Function(DateTime, [TapDownDetails])? onTapDown;
 
   /// The margin value for every block.
   final EdgeInsets? margin;
@@ -96,7 +96,7 @@ class HeatMap extends StatefulWidget {
     this.textColor,
     this.size = 20,
     this.fontSize,
-    this.onClick,
+    this.onTapDown,
     this.margin,
     this.borderRadius,
     this.datasets,
@@ -143,7 +143,7 @@ class _HeatMap extends State<HeatMap> {
           textColor: widget.textColor,
           colorsets: widget.colorsets,
           borderRadius: widget.borderRadius,
-          onClick: widget.onClick,
+          onTapDown: widget.onTapDown,
           margin: widget.margin,
           showText: widget.showText,
         )),

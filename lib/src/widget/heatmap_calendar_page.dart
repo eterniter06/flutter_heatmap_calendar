@@ -70,10 +70,20 @@ class HeatMapCalendarPage extends StatelessWidget {
   /// And get highest key value of filtered datasets using [DatasetsUtil.getMaxValue].
   final int? maxValue;
 
+  /// Function that will be called when a block tap is registered.
+  ///
+  /// Paratmeter gives clicked [DateTime] value.
+  final Function(DateTime, TapDownDetails)? onTapDown;
+
+  /// Function called when tap is released
+  ///
+  /// Gives the [DateTime] value
+  final Function(DateTime, TapUpDetails)? onTapUp;
+
   /// Function that will be called when a block is clicked.
   ///
   /// Paratmeter gives clicked [DateTime] value.
-  final Function(DateTime)? onClick;
+  final Function(DateTime)? onTap;
 
   HeatMapCalendarPage({
     Key? key,
@@ -88,7 +98,9 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.datasets,
     this.colorsets,
     this.borderRadius,
-    this.onClick,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTap,
     this.calendarEndDate,
     this.calendarBeginDate,
   })  : separatedDate = DateUtil.separatedMonth(baseDate),
@@ -117,7 +129,9 @@ class HeatMapCalendarPage extends StatelessWidget {
             flexible: flexible,
             margin: margin,
             maxValue: maxValue,
-            onClick: onClick,
+            onTapDown: onTapDown,
+            onTapUp: onTapUp,
+            onTap: onTap,
             datasets: Map.from(datasets ?? {})
               ..removeWhere(
                 (key, value) => !(key.isAfter(date.keys.first) &&

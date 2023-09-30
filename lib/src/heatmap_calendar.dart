@@ -71,9 +71,21 @@ class HeatMapCalendar extends StatefulWidget {
   /// Default value is [ColorMode.opacity].
   final ColorMode colorMode;
 
-  /// Function that will be called when a block is clicked.
+  /// Function that will be called when a block tap is registered.
+  /// Use onClick if you do not need individual tap down and tap up events
   ///
   /// Paratmeter gives clicked [DateTime] value.
+  final Function(DateTime date, TapDownDetails tapDetails)? onTapDown;
+
+  /// Function called when tap is released.
+  /// Use onClick if you do not need individual tap down and tap up events
+  ///
+  /// Gives clicked [DateTime] value.
+  final Function(DateTime date, TapUpDetails tapDetails)? onTapUp;
+
+  /// Function called when block is clicked
+  ///
+  /// Gives clicked [DateTime] value
   final Function(DateTime)? onClick;
 
   /// Function that will be called when month is changed.
@@ -125,6 +137,8 @@ class HeatMapCalendar extends StatefulWidget {
     this.weekTextColor,
     this.borderRadius,
     this.margin,
+    this.onTapDown,
+    this.onTapUp,
     this.onClick,
     this.onMonthChange,
     this.colorTipCount,
@@ -295,7 +309,9 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             datasets: widget.datasets,
             colorsets: widget.colorsets,
             borderRadius: widget.borderRadius,
-            onClick: widget.onClick,
+            onTapDown: widget.onTapDown,
+            onTapUp: widget.onTapUp,
+            onTap: widget.onClick,
           ),
           if (widget.showColorTip == true)
             HeatMapColorTip(

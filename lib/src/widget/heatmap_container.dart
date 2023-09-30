@@ -11,7 +11,9 @@ class HeatMapContainer extends StatelessWidget {
   final Color? textColor;
   final EdgeInsets? margin;
   final bool? showText;
-  final Function(DateTime dateTime)? onClick;
+  final Function(DateTime dateTime, TapDownDetails details)? onTapDown;
+  final Function(DateTime dateTime, TapUpDetails details)? onTapUp;
+  final Function(DateTime dateTime)? onTap;
 
   const HeatMapContainer({
     Key? key,
@@ -23,7 +25,9 @@ class HeatMapContainer extends StatelessWidget {
     this.backgroundColor,
     this.selectedColor,
     this.textColor,
-    this.onClick,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTap,
     this.showText,
   }) : super(key: key);
 
@@ -59,7 +63,13 @@ class HeatMapContainer extends StatelessWidget {
           ),
         ),
         onTap: () {
-          onClick != null ? onClick!(date) : null;
+          onTap != null ? onTap!(date) : null;
+        },
+        onTapDown: (TapDownDetails tapDownDetails) {
+          onTapDown != null ? onTapDown!(date, tapDownDetails) : null;
+        },
+        onTapUp: (TapUpDetails tapDownDetails) {
+          onTapUp != null ? onTapUp!(date, tapDownDetails) : null;
         },
       ),
     );
