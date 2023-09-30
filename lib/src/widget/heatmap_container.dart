@@ -9,6 +9,7 @@ class HeatMapContainer extends StatelessWidget {
   final Color? backgroundColor;
   final Color? selectedColor;
   final Color? textColor;
+  final bool? contrastingTextColor;
   final EdgeInsets? margin;
   final bool? showText;
   final Function(DateTime dateTime, TapDownDetails details)? onTapDown;
@@ -19,17 +20,26 @@ class HeatMapContainer extends StatelessWidget {
     Key? key,
     required this.date,
     required this.size,
+    this.selectedColor,
     this.margin,
     this.fontSize,
     this.borderRadius,
     this.backgroundColor,
-    this.selectedColor,
     this.textColor,
+    this.contrastingTextColor,
     this.onTapDown,
     this.onTapUp,
     this.onTap,
     this.showText,
   }) : super(key: key);
+
+  Color contrastTextColor(Color color) {
+    double luminance =
+        (0.2126 * color.red + 0.7152 * color.green + 0.0722 * color.blue);
+    return (luminance < 140)
+        ? const Color(0xffffffff)
+        : const Color(0xff000000);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +61,14 @@ class HeatMapContainer extends StatelessWidget {
                 ? Text(
                     date.day.toString(),
                     style: TextStyle(
-                        color: textColor ?? const Color(0xFF8A8A8A),
+                        color: contrastingTextColor == true
+                            ? contrastTextColor(selectedColor ?? Colors.grey)
+                            : textColor ?? const Color(0xFF8A8A8A),
                         fontSize: fontSize),
                   )
                 : null,
             decoration: BoxDecoration(
-              color: selectedColor,
+              color: selectedColor ?? Colors.grey,
               borderRadius:
                   BorderRadius.all(Radius.circular(borderRadius ?? 5)),
             ),

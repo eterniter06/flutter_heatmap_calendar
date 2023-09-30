@@ -49,6 +49,9 @@ class HeatMapCalendarPage extends StatelessWidget {
   /// The text color value of every blocks
   final Color? textColor;
 
+  /// Choose text color to be black or white based on the color of the container
+  final bool contrastingTextColor;
+
   /// ColorMode changes the color mode of blocks.
   ///
   /// [ColorMode.opacity] requires just one colorsets value and changes color
@@ -93,6 +96,7 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.flexible,
     this.fontSize,
     this.defaultColor,
+    this.contrastingTextColor = false,
     this.textColor,
     this.margin,
     this.datasets,
@@ -125,6 +129,7 @@ class HeatMapCalendarPage extends StatelessWidget {
             defaultColor: defaultColor,
             colorsets: colorsets,
             textColor: textColor,
+            contrastingTextColor: contrastingTextColor,
             borderRadius: borderRadius,
             flexible: flexible,
             margin: margin,

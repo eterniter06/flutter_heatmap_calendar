@@ -44,6 +44,8 @@ class HeatMapCalendarRow extends StatelessWidget {
   /// The text color value of [HeatMapContainer]
   final Color? textColor;
 
+  final bool contrastingTextColor;
+
   /// The colorsets which give the color value for its thresholds key value.
   ///
   /// Be aware that first Color is the maximum value if [ColorMode] is [ColorMode.opacity].
@@ -98,6 +100,7 @@ class HeatMapCalendarRow extends StatelessWidget {
     this.fontSize,
     this.defaultColor,
     this.colorsets,
+    this.contrastingTextColor = false,
     this.textColor,
     this.borderRadius,
     this.flexible,
@@ -142,6 +145,7 @@ class HeatMapCalendarRow extends StatelessWidget {
                   backgroundColor: defaultColor,
                   size: size,
                   fontSize: fontSize,
+                  contrastingTextColor: contrastingTextColor,
                   textColor: textColor,
                   borderRadius: borderRadius,
                   margin: margin,

@@ -39,8 +39,11 @@ class HeatMapCalendar extends StatefulWidget {
   /// The double value of every block's size.
   final double size;
 
-  /// The text color value of every blocks.
+  /// The text color value of every blocks. Cannot be used if contrastingTextColor has been set.
   final Color? textColor;
+
+  /// Use contrasting text color. This cannot be used with textColor
+  final bool contrastingTextColor;
 
   /// The double value of every block's fontSize.
   final double? fontSize;
@@ -127,12 +130,13 @@ class HeatMapCalendar extends StatefulWidget {
     this.flexible = false,
     this.size = 42,
     this.colorTipSize = 10,
+    this.contrastingTextColor = false,
+    this.textColor,
     this.defaultColor,
     this.datasets,
     this.initDate,
     this.fontSize,
     this.monthFontSize,
-    this.textColor,
     this.weekFontSize,
     this.weekTextColor,
     this.borderRadius,
@@ -153,6 +157,10 @@ class HeatMapCalendar extends StatefulWidget {
             (trailingColorTipHelper == null && leadingColorTipHelper == null) ||
                 colorTipHelper == null,
             'colorTipHelper is deprecated. Please use the trailing and leading counterparts.\ncolorTipHelper cannot be used in conjunction with trailingColorTipHelper or leadingColorTipHelpers'),
+        assert(
+            contrastingTextColor == true && textColor == null ||
+                contrastingTextColor == false,
+            'Both properties "contrastingTextColor" and "textColor" cannot be set simultaneously.\ncontrastingTextColor:$contrastingTextColor, textColor:$textColor'),
         super(key: key);
 
   @override
@@ -305,6 +313,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             fontSize: widget.fontSize,
             defaultColor: widget.defaultColor,
             textColor: widget.textColor,
+            contrastingTextColor: widget.contrastingTextColor,
             margin: widget.margin,
             datasets: widget.datasets,
             colorsets: widget.colorsets,
