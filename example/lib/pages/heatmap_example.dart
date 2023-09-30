@@ -70,9 +70,9 @@ class _HeatMapExample extends State<HeatMapExample> {
                     11: Colors.indigo,
                     13: Colors.purple,
                   },
-                  onClick: (value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(value.toString())));
+                  onClick: (date) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(date.toString())));
                   },
                 ),
               ),

@@ -71,7 +71,7 @@ class HeatMapPage extends StatelessWidget {
   /// Function that will be called when a block is clicked.
   ///
   /// Paratmeter gives clicked [DateTime] value.
-  final Function(DateTime, TapDownDetails)? onTapDown;
+  final Function(DateTime date)? onClick;
 
   final bool? showText;
 
@@ -87,7 +87,7 @@ class HeatMapPage extends StatelessWidget {
     this.textColor,
     this.colorsets,
     this.borderRadius,
-    this.onTapDown,
+    this.onClick,
     this.margin,
     this.showText,
   })  : _dateDifferent = endDate.difference(startDate).inDays,
@@ -127,7 +127,7 @@ class HeatMapPage extends StatelessWidget {
         borderRadius: borderRadius,
         margin: margin,
         maxValue: maxValue,
-        onTapDown: onTapDown,
+        onClick: onClick,
         datasets: datasets,
         showText: showText,
       ));

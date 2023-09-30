@@ -61,9 +61,14 @@ class HeatMapColumn extends StatelessWidget {
   /// Function that will be called when a block is clicked.
   ///
   /// Paratmeter gives clicked [DateTime] value.
+  final Function(DateTime date)? onClick;
+
+  /// Function that will be called when block tap is registered.
+  ///
+  /// Paratmeter gives clicked [DateTime] value.
   final Function(DateTime, TapDownDetails details)? onTapDown;
 
-  /// Function called when tap is released
+  /// Function called when block tap is released
   ///
   /// Gives [DateTime] value
   final Function(DateTime, TapUpDetails details)? onTapUp;
@@ -92,6 +97,7 @@ class HeatMapColumn extends StatelessWidget {
     this.borderRadius,
     this.margin,
     this.colorsets,
+    this.onClick,
     this.onTapDown,
     this.onTapUp,
     this.maxValue,
@@ -108,6 +114,7 @@ class HeatMapColumn extends StatelessWidget {
             textColor: textColor,
             borderRadius: borderRadius,
             margin: margin,
+            onTap: onClick,
             onTapDown: onTapDown,
             onTapUp: onTapUp,
             showText: showText,
