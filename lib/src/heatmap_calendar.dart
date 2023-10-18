@@ -122,6 +122,14 @@ class HeatMapCalendar extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double colorTipSize;
 
+  /// Icon that will be used to navigate to the previous month.
+  /// Defaults to [Icons.arrow_back_ios] with size 14.
+  final Icon prevMonthIcon;
+
+  /// Icon that will be used to navigate to the next month.
+  /// Defaults to [Icons.arrow_forward_ios] with size 14.
+  final Icon nextMonthIcon;
+
   const HeatMapCalendar({
     Key? key,
     required this.colorsets,
@@ -150,6 +158,14 @@ class HeatMapCalendar extends StatefulWidget {
     this.calendarEndDate,
     this.leadingColorTipHelper,
     this.trailingColorTipHelper,
+    this.prevMonthIcon = const Icon(
+      Icons.arrow_back_ios,
+      size: 14,
+    ),
+    this.nextMonthIcon = const Icon(
+      Icons.arrow_forward_ios,
+      size: 14,
+    ),
     @Deprecated(
         'Please use leadingColorTipHelper and trailingColorTipHelper instead.')
     this.colorTipHelper,
@@ -218,10 +234,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       children: <Widget>[
         // Previous month button.
         IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 14,
-          ),
+          icon: widget.prevMonthIcon,
           onPressed:
               isMonthAfterCalendarBeginDate() ? () => changeMonth(-1) : null,
         ),
@@ -237,10 +250,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         ),
         // Next month button.
         IconButton(
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
-          ),
+          icon: widget.nextMonthIcon,
           onPressed:
               isMonthBeforeCalendarEndDate() ? () => changeMonth(1) : null,
         ),

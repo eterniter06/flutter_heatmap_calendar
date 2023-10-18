@@ -86,6 +86,8 @@ import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 |(Deprecated)<br>colorTipHelper|`List<Widget?>?`|`null`|Widgets which are shown at left and right side of `colorTip`.<br>First value is the left side widget and second value is the right side widget.<br>Give null value makes default 'less' and 'more' text.|
 |colorTipCount|`int?`|`7`|Length of `colorTip` block.|
 |colorTipSize|`double`|`10`|The size of `colorTip`.|
+|prevMonthIcon|`Icon`|`Icon(Icons.arrow_back_ios, size: 14)`|Default icon used for navigating to the previous month|
+|nextMonthIcon|`Icon`|`Icons(Icons.arrow_forward_ios, size: 14)`|Default icon used for navigating to the next month|
 
 ## Example
 
