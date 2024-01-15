@@ -1,10 +1,10 @@
 name: flutter_heatmap_calendar
 description: Flutter heatmap calendar inspired by github contribution chart which includes traditional mode / calendar mode.
-version: 1.0.10
+version: 1.0.12
 homepage: https://github.com/devappmin/flutter_heatmap_calendar
 
 environment:
-    sdk: ">=2.19.0 <3.0.0"
+    sdk: ">=2.19.5 <3.0.0"
     flutter: ">=1.17.0"
 
 dependencies:

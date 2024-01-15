@@ -234,7 +234,20 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       children: <Widget>[
         // Previous month button.
         IconButton(
-          icon: widget.prevMonthIcon,
+          icon: Icon(
+            widget.prevMonthIcon.icon,
+            color: isMonthAfterCalendarBeginDate()
+                ? widget.prevMonthIcon.color
+                : Colors.grey,
+            fill: widget.prevMonthIcon.fill,
+            grade: widget.prevMonthIcon.grade,
+            opticalSize: widget.prevMonthIcon.opticalSize,
+            semanticLabel: widget.prevMonthIcon.semanticLabel,
+            shadows: widget.prevMonthIcon.shadows,
+            size: widget.prevMonthIcon.size,
+            textDirection: widget.prevMonthIcon.textDirection,
+            weight: widget.prevMonthIcon.weight,
+          ),
           onPressed:
               isMonthAfterCalendarBeginDate() ? () => changeMonth(-1) : null,
         ),
@@ -250,7 +263,20 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         ),
         // Next month button.
         IconButton(
-          icon: widget.nextMonthIcon,
+          icon: Icon(
+            widget.nextMonthIcon.icon,
+            color: isMonthBeforeCalendarEndDate()
+                ? widget.nextMonthIcon.color
+                : Colors.grey,
+            fill: widget.nextMonthIcon.fill,
+            grade: widget.nextMonthIcon.grade,
+            opticalSize: widget.nextMonthIcon.opticalSize,
+            semanticLabel: widget.nextMonthIcon.semanticLabel,
+            shadows: widget.nextMonthIcon.shadows,
+            size: widget.nextMonthIcon.size,
+            textDirection: widget.nextMonthIcon.textDirection,
+            weight: widget.nextMonthIcon.weight,
+          ),
           onPressed:
               isMonthBeforeCalendarEndDate() ? () => changeMonth(1) : null,
         ),
